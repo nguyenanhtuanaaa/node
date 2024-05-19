@@ -1,0 +1,114 @@
+<%- include('headermin')%>
+
+<div style="display: flex; justify-content: center;">
+   
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-top: -100px;">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm Mới</button>
+            <table class="table" >
+                <thead>
+                    <tr >
+                        
+                        <th scope="col">Tên Sản Phẩm</th>
+                        <th scope="col">Hình Ảnh</th>
+                        <th scope="col">Mô Tả</th>
+                        <th scope="col">Tác Giả</th>
+                        
+                        <th scope="col"></th>
+                    </tr>
+                </thead>  
+               
+                <tbody>
+                    <% for (let product of products) { %>   
+                    <tr>
+                        <td scope="col"><%= product.nameProduct %></td>
+                        <td scope="col"><img src="/image/<%= product.images %>" alt="" style=" width: 70px; height: 70px; "></td>
+                        <td scope="col" class="truncated-text" style="height: 87px;"><%= product.sortDescription%></td>
+                        <td scope="col"><%= product.authorProduct %></td>
+                        <td scope="col">
+                          <button type="button" class="btn btn-danger"onclick="deleteProduct('<%= product.idProduct %>')">Xóa</button>
+                            <!-- <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModall" onclick="updateProduct('<%= products[0].idProduct %>')">Cập Nhật</button></td> -->
+                    </tr>
+                    <% } %>
+                </tbody>
+                
+            </table>
+        </main>
+    
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Danh mục</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="/admin/product/newproduct" method="post" enctype="multipart/form-data">
+                <select name="idCategory" id="">
+                    <% for (let cate of catalogs) { %>
+                        <option value="<%= cate.idCategory %>"> <%= cate.nameCategory %></option>
+                        <% } %>
+                </select><br>
+                <label for=""> Tên Sản Phẩm</label>
+                <input type="text" class="form-control" name="productName" placeholder="Tên" >
+                <label for=""> Tác giả</label>
+                <input type="text" class="form-control" name="authorProduct" placeholder="Tác giả" >
+                <label for=""> Mô Tả</label>
+                <input type="text" class="form-control" name="description" placeholder="Mô Tả" >
+                <label for=""> Ảnh</label>
+                <input type="file" class="form-control" name="productImage" placeholder="Ảnh" >
+                <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Thêm sản phẩm </button>
+            </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModall" tabindex="-1" aria-labelledby="exampleModalLabell" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Danh mục</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-body">
+                <% for (let product of products) { %>  
+                    <form action="/admin/product/upproduct/<%= product.idProduct %>" method="POST" enctype="multipart/form-data">
+                      <select name="upidCategory">
+                        <% for (let cate of catalogs) { %>
+                          <option value="<%= cate.idCategory %>" id="upidCategory" name="upidCategory"> <%= cate.nameCategory %></option>
+                        <% } %>
+                      </select><br>
+                  
+                      <label for="upproductName">Tên Sản Phẩm</label>
+                      <input type="text" class="form-control" id="upproductName" name="upproductName" placeholder="Tên" value="<%= product.nameProduct %>">
+                      
+                      <label for="upauthorProduct">Tác giả</label>
+                      <input type="text" class="form-control" id="upauthorProduct" name="upauthorProduct" placeholder="Tác giả" value="<%= product.authorProduct %>">
+                      
+                      <label for="updescription">Mô Tả</label>
+                      <input type="text" class="form-control" id="updescription" name="updescription" placeholder="Mô Tả" value="<%= product.sortDescription %>">
+                      
+                      <label for="upproductImage">Ảnh</label>
+                      <input type="file" class="form-control" id="upproductImage" name="upproductImage" placeholder="Ảnh">
+                      
+                      <button type="submit" id="submitupdate" class="btn btn-primary" style="margin-top: 10px;">Cập nhật sản phẩm </button>
+                    </form>
+                  <% } %>
+                 
+                  
+              </div>
+              
+                
+               
+            
+        </div>
+        <div class="modal-footer">
+           
+        </div>
+      </div>
+    </div>
+</div>

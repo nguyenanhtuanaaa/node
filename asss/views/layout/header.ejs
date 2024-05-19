@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css" rel="stylesheet" />
+  <style>
+
+  @import url('https://fonts.googleapis.com/css2?family=Babylonica&family=Bungee&family=Cabin&family=Dancing+Script&family=Gloria+Hallelujah&family=Libre+Franklin:wght@100&family=Luckiest+Guy&family=Marck+Script&family=Pacifico&family=Poppins:wght@200&family=Ranchers&family=Roboto+Condensed:wght@300&display=swap');
+
+    .rating {
+  display: flex;
+  flex-direction: row-reverse;
+}
+.rating input {
+  display: none;
+}
+.truncated-text {
+    width: 200px; 
+    height: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block; 
+}
+.rating label {
+  cursor: pointer;
+  width: 26px;
+  height: 26px;
+  background-image: url('https://phunugioi.com/wp-content/uploads/2020/11/tranh-to-mau-ngoi-sao-don-gian-cho-be-to-mau-465x600.jpg');
+  background-size: cover;
+}
+.rating input:checked + label {
+  background-image: url('https://stockdep.net/files/images/53113076.jpg');
+}
+
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid ">
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">Trang chủ</a>
+          </li>
+          <% for(let cate of catalogs){ %>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/shop/<%= cate.idCategory
+                %>">
+                <%= cate.nameCategory %>
+              </a>
+            </li>
+            <%}%>
+              </a>
+            </li>
+        </ul>
+        <form action="/shop/search" method="GET">
+          <div class="input-group">
+              <input name="term" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+          </div>
+      </form>
+        
+        <% if (loggedIn) { %>
+        <a class="nav-link active" aria-current="page" href="/user/logout">Đăng xuất</a> |
+      <% } else { %>
+        <a class="nav-link active" aria-current="page" href="/user/resgiter">Đăng kí</a> |
+        <a class="nav-link active" aria-current="page" href="/user/login">Đăng nhập</a>
+      <% } %>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+  integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+      $(document).ready(function() {
+          $('input[type=radio][name=rating]').change(function() {
+              var ratingValue = $(this).val();
+              // Lưu giữ giá trị ratingValue vào một biến để gửi lên server khi bấm "Gửi bình luận"
+          });
+  
+          $('#submitReview').click(function() {
+              var reviewText = $('textarea[name=reviewText]').val();
+              // Gửi dữ liệu reviewText và ratingValue lên server bằng AJAX hoặc form submission
+          });
+      });
+  </script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</html>

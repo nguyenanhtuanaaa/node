@@ -1,0 +1,17 @@
+<%- include('header')%>
+
+<form action="/addnew" method="post" style="width:30% ; margin: 0 auto;"enctype="multipart/form-data">
+    <select name="idCategory" id="">
+        <option value="1">Sách</option>
+        <option value="2">Vở</option>
+    </select><br>
+    <label for=""> Tên Sản Phẩm</label>
+    <input type="text" class="form-control" name="productName" placeholder="Tên" >
+    <label for=""> Giá</label>
+    <input type="number" class="form-control" name="price" placeholder="Giá" >
+    <label for=""> Mô Tả</label>
+    <input type="text" class="form-control" name="description" placeholder="Mô Tả" >
+    <label for=""> Ảnh</label>
+    <input type="file" class="form-control" name="productImage" placeholder="Ảnh" >
+    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Thêm sản phẩm </button>
+</form>

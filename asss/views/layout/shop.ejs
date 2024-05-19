@@ -1,0 +1,15 @@
+<%- include('header')%>
+
+<div style="display: flex;justify-content: center; flex-wrap: wrap; ">
+     <% for (let product of products) { %>
+        <div class="card" style="width: 18rem; margin-right: 30px; margin-bottom: 30px;">
+            <img src="/image/<%= product.images %>" class="card-img-top" alt="..." height="200px">
+            <div class="card-body">
+                <h5 class="card-title"><%= product.nameProduct %></h5>
+                <h2 class="product__price"><%= product.authorProduct %></h2>
+                <p class="card-text truncated-text"><%= product.sortDescription %></p>
+               <a href="/detail/idProduct=<%= product.idProduct %>"> <button type="button" class="btn btn-danger">Xem chi tiết</button></a>
+            </div>
+        </div>
+    <% } %>
+</div>

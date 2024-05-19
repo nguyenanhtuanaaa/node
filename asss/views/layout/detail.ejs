@@ -1,0 +1,54 @@
+<%- include('header')%>
+<div style="display: flex;justify-content: center;">
+    <% for (let product of products) { %>
+    <div class="row" style="display: flex; justify-content: center;align-items: center;">
+        <div class="col-md-5 text-center  " >
+            <img  src="/image/<%= product.images %>"id="productImage" height="300px"width="300px" style="margin-left: 100px;">
+        </div>
+        <div class="col-md-5 info  " style="margin-right: 100px;">
+            <div class="row title">
+                <div class="col text-center">
+                    <h2 id="productName"><%= product.nameProduct %></h2>
+                </div>
+            </div>
+            <div >
+                <div  >
+                
+                  <div><h5 class="mb-0 font-weight-semibold"  style=" margin-top: 20px;color:red "id="authorProduct"> Tác giả:<%= product.authorProduct %></h5>  
+                  </div>
+                
+                    
+                </div>
+                <div >
+                <h5 id="productDescription">Nội Dung Mô Tả: <%= product.sortDescription %></h5>
+                
+                    
+                </div>
+
+              
+            </div>
+          
+
+    </div>
+ 
+    <div style="margin-top: 20px; font-family: Open Sans; width: 500px; margin-right: 30%;   ">
+        <h3>Bình luận</h3>
+        <% for (let review of reviews) { %>
+            <div style="display: flex;">
+                <ion-icon name="person-circle-outline" style="font-size: 30px;"></ion-icon>
+                
+        </div>
+        <div>
+            <h5><%= review.reviewText %></h5>
+        </div>
+        <% } %>
+        <form action="/addreview?idProduct=<%= product.idProduct %>" method="post">
+            <textarea type="input" name="reviewText" id="" style="width: 500px;"></textarea>
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Gửi bình luận </button>
+        </form>
+    </div>
+    <% } %>
+      
+    
+ </div>
+  

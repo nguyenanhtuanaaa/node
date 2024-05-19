@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="admin.html" style="margin: 0 auto;">Quản Lý Admin</a>
+
+
+            </div>
+        </nav>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-white sidebar"
+                style="border: 1px solid #ccc; ">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item" style="display: flex;  align-items: center;">
+
+                            <a class="nav-link" href="/admin">
+                                <ion-icon name="albums-outline"></ion-icon>
+                                Quản Lý Danh Mục
+                            </a>
+                        </li>
+                        <li class="nav-item" style="display: flex;  align-items: center;">
+
+                            <a class="nav-link" href="/admin/product">
+                                <ion-icon name="file-tray-full-outline"></ion-icon>
+                                Quản Lý Sản Phẩm
+                            </a>
+                        </li>
+                      
+                        <li class="nav-item" style="display: flex;  align-items: center;">
+
+                            <a class="nav-link" href="/admin/review">
+                                <ion-icon name="bar-chart-outline"></ion-icon>
+                                Quản Lý Bình Luận
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>    
+    <style>
+        .nav-link {
+            color: black;
+        }
+
+        .nav-link:hover {
+            background-color: #0d6efd;
+            color: white;
+            width: 100%;
+        }
+        .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .form-group label {
+        width: 150px; /* Điều chỉnh kích thước theo nhu cầu */
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 5px;
+        margin: 5px 0;
+    }
+    .truncated-text {
+    width: 200px; /* Điều chỉnh độ rộng tùy ý */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block; /* Cần thiết để áp dụng text-overflow */
+}
+    </style>
+     <script>
+      function deleteCategory(categoryId) {
+            fetch(`/admin/delete-category/${categoryId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                
+            })
+            .catch(error => {
+                console.error('Error:', error);
+               
+            });
+        }
+        
+  
+        function deleteProduct(idProduct) {
+            if (!idProduct) {
+            console.error('ID is empty or undefined.');
+            return;
+        }
+        fetch(`/admin/delete-product/product/${idProduct}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+           
+            console.log(data.message);
+            
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+           
+        });
+    
+        }
+
+        function update(categoryId) {
+            console.log('categoryId:', categoryId);
+            document.getElementById("updatecategoriesButton").addEventListener("click", function(event) {
+                event.preventDefault();
+                const newNameCategory = document.getElementById("updatecategories").value.trim();
+                if (newNameCategory !== "") {
+                    fetch(`/admin/addneww/${categoryId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ categoryName: newNameCategory }),
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data.message);
+                    })
+                    .catch(error => {
+                        console.error('There was a problem with the fetch operation:', error);
+                    });
+                } else {
+                    console.log('Giá trị của categoryName không hợp lệ.');
+                    alert('Vui lòng nhập giá trị cho Tên danh mục.');
+                }
+            });
+        }
+        function updateProduct(productId) {
+         console.log('idProduct:', productId);
+
+         document.getElementById("subitupdate").addEventListener("click", function(event) {
+         event.preventDefault();
+
+        const upidCategory = document.getElementById('upidCategory').value.trim();
+        const upproductName = document.getElementById('upproductName').value.trim();
+        const upauthorProduct = document.getElementById('upauthorProduct').value.trim();
+        const updescription = document.getElementById('updescription').value.trim();
+
+        fetch(`/admin/product/upproduct/${productId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                upidCategory: upidCategory,
+                upproductName: upproductName,
+                upauthorProduct: upauthorProduct,
+                updescription: updescription,
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    });
+}
+
+
+
+        
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function show(idProduct) {
+            $.ajax({
+                url: `/admin/review/${idProduct}`,
+                type: 'GET',
+                success: function(data) {
+                    $('#modalContent').html(data);
+                    $('#exampleModal').modal('show');
+                },
+                error: function(err) {
+                    console.error("Error fetching reviews:", err);
+                }
+            });
+        }
+    </script>
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>   
+</html>

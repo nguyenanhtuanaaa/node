@@ -1,0 +1,22 @@
+<%- include('header')%>
+<% if (products.length > 0) { %>
+    <h2>Search Results for '<%= query %>'</h2>
+    <ul>
+      <% products.forEach(product => { %>
+        <li><%= product.nameProduct %></li>
+        <!-- Hiển thị các thuộc tính khác của sản phẩm tại đây -->
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No results found for '<%= query %>'</p>
+  <% } %>
+  
+  <!-- Hiển thị các danh mục từ dataCatalog -->
+  <h3>Catalogs</h3>
+  <ul>
+    <% catalogs.forEach(catalog => { %>
+      <li><%= catalog.catalogName %></li>
+      <!-- Hiển thị các thuộc tính khác của danh mục tại đây -->
+    <% }); %>
+  </ul>
+  

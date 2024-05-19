@@ -1,0 +1,19 @@
+<%- include('header')%>
+
+<form action="/user/user" method="post" style="width: 500px; margin: 0 auto;">
+  <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Tên đăng nhập</label>
+      <input type="text" class="form-control" name="name" aria-describedby="emailHelp">
+      <% if (typeof errorMessage !== 'undefined') { %>
+        <p><%= errorMessage %></p>
+        <% } %>
+  </div>
+      <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Mật Khẩu</label>
+          <input type="password" class="form-control" name="password">
+          <% if (typeof errorMessage !== 'undefined') { %>
+          <p><%= errorMessage %></p>
+          <% } %>
+      </div>
+  <button type="submit" class="btn btn-primary">Đăng nhập</button>
+</form>

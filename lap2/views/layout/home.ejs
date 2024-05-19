@@ -1,0 +1,11 @@
+
+<%- include('header')%>
+<main>
+  <h1> Chào mừng đến với website!!</h1>
+  <% if(kindOfDay=='Chủ nhật'||kindOfDay=='Thứ bảy'){%>
+<h2> Hôm nay là cuối tuần</h2>
+  <%}else{%>
+  <h2> Hôm nay là <%=kindOfDay%></h2>
+  <%}%>
+
+</main>

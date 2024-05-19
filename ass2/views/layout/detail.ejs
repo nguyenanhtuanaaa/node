@@ -1,0 +1,64 @@
+<%- include('header')%>
+<div style="display: flex;justify-content: center;">
+    <% for (let product of products) { %>
+       <!-- <div class="card" style="width: 18rem; margin-right: 30px;">
+           <img src="/image/<%= product.images %>" class="card-img-top" alt="..." height="200px">
+           <div class="card-body">
+               <h5 class="card-title"><%= product.nameProduct %></h5>
+               <h2 class="product__price">$<%= product.priceProduct %></h2>
+               <p class="card-text"><%= product.sortDescription %></p>
+              
+           </div>
+       </div> -->
+ 
+
+    <div class="row" style="display: flex;">
+        <div class="col-md-6 text-center align-self-center" >
+            <img  src="/image/<%= product.images %>"id="productImage" height="300px"width="300px">
+        </div>
+        <div class="col-md-6 info text-center align-self-center">
+            <div class="row title">
+                <div class="col">
+                    <h2 id="productName"><%= product.nameProduct %></h2>
+                </div>
+            </div>
+            <div style="margin-left: 50px;">
+                <div  style="display: flex;">
+                
+                  <div>                 <h5 class="mb-0 font-weight-semibold"  style=" margin-top: 20px;color:red "id="authorProduct"><%= product.authorProduct %></h5>  
+                  </div>
+                
+                    
+                </div>
+                <div  style="display: flex;">
+                
+                  
+                <h5 id="productDescription"><%= product.sortDescription %></h5>
+                
+                    
+                </div>
+
+              
+            </div>
+          
+
+    </div>
+    <div style="margin-top: 20px; font-family: Open Sans; ">
+        <h3>Bình luận</h3>
+        <div class="rating">
+            <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+            
+        </div>
+          <p id="ratingDescription"></p>
+          <input type="input" name="" id="" >
+          
+    </div>
+      
+    <% } %>
+ </div>
+  
+

@@ -1,0 +1,84 @@
+<%- include('headermin')%>
+
+<div style="display: flex; justify-content: center;">
+   
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-top: -100px;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <!-- <th scope="col">Mô Tả</th> -->
+                        <th scope="col">Tên Sản Phẩm</th>
+                        
+                        <th scope="col">Hình Ảnh</th>
+                        <!-- <th scope="col">Bình luận</th> -->
+                        
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+               
+                <tbody>
+                    <% for (let product of products) { %>   
+                        <tr>
+                            <td scope="col"><%= product.nameProduct %></td>
+                            <td scope="col"><img src="/image/<%= product.images %>" alt="" style=" width: 70px; height: 70px; "></td>
+                            <td scope="col">
+                                <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick ="show('<%= product.idProduct %>')">Chi tiết</button></td>
+                               </td>
+                              
+                        </tr>
+                        <% } %>
+                </tbody>
+                
+            </table>
+        </main>
+    
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Bình luận</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="post" style="width:70% ; margin: 0 auto;"enctype="multipart/form-data">
+                <table class="table" id="reviewTable">
+                    <thead>
+                        <tr>
+                            <!-- <th scope="col">Mô Tả</th> -->
+                            <th scope="col">Tên Sản Phẩm</th>
+                            
+                            <th scope="col">Hình Ảnh</th>
+                            <th scope="col">Bình luận</th>
+                            
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                <% for (let review of reviews) { %>   
+                    
+                    <tr>
+                        <!-- <td scope="col"><%= review.idProduct %></td> -->
+                        <td scope="col"><%= review.nameProduct %></td>
+                        <!-- <td scope="col"><%= review.images  %></td> -->
+                        <td scope="col"><img src="/image/<%= review.images  %>" alt="" style=" width: 70px; height: 70px; "></td>
+                        <td scope="col"><%= review.reviewText%></td>
+                        
+                       
+                        </td>
+                    </tr>
+                </tbody>
+                <% } %>
+             
+                
+            </table>
+            </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+</div>
+
+</div>

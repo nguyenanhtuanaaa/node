@@ -1,0 +1,73 @@
+<%- include('headermin')%>
+
+<div style="display: flex; justify-content: center;">
+   
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" style="margin-top: -100px;">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Thêm Mới</button>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Tên Danh Mục</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+               
+                <tbody>
+                    <% for (var i=0; i<catalogs.length;i++) { %>
+                    <tr>
+                        <td scope="col"><%= catalogs[i].nameCategory %></td>
+                        <td scope="col"><button type="button" class="btn btn-danger"onclick="deleteCategory('<%= catalogs[i].idCategory %>')">Xóa</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModall" onclick="update('<%= catalogs[i].idCategory %>')">Cập Nhật</button></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+                
+            </table>
+        </main> 
+    
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Danh mục</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="/admin/catenew" method="post">
+                <label for="categoryName">Tên danh mục:</label>
+                <input type="text" name="categoryName" required><br>
+                <button type="submit" id="addcategoriesButton" class="btn btn-primary" style="margin-top: 10px;" data-bs-dismiss="modal">Thêm danh mục</button>
+            </form>
+            
+        </div>
+        <div class="modal-footer">
+           
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModall" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cập Nhật Danh mục</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="/admin/addneww/<%= products.idCategory %>" method="post">
+            <label for="updatecategories">Tên danh mục:</label>
+            <input type="text" id="updatecategories" name="upcategoryName" value="<%= catalogs.nameCategory %>" required><br>
+            <button type="submit" id="updatecategoriesButton" class="btn btn-primary" style="margin-top: 10px; margin-left: 30%;margin-right: 30%;" data-bs-dismiss="modal">Cập nhật danh mục</button>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+</div>
+
+
+  
+
